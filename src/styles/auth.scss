@@ -87,8 +87,8 @@
         color: #e559f9;
       }
     }
-    .create-room{
-      margin-top: 64px;
+    .create-room, .btn-login, .btn-outher-account{
+      margin-top: .4rem;
       height: 50px;
       border-radius: 8px;
       font-weight: 500;
@@ -111,7 +111,12 @@
         filter: brightness(.9);
       }
     }
-
+    .btn-outher-account{
+      background: #a8a8b3;
+    }
+    .create-room{
+      margin-top: 2rem;
+    }
     .separator{
       font-size: 14px;
       color: #a8a8b3;
@@ -148,7 +153,7 @@
       }
     }
     h2{ color: #bbc; }
-    .create-room{ background: #bb1b0d; }
+    .create-room, .btn-login{ background: #bb1b0d; }
     input{
       background: rgba(255,255,255,0.02) !important;
       color: #889;

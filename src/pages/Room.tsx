@@ -62,7 +62,7 @@ export function Room(){
       <header>
         <div className="content">
           <img src={ theme == 'light' ? logoImg : logoDarkImg } alt="Letmeask" onClick={
-            () => history.push('/')
+            () => history.push('/home')
           }/>
           <RoomCode code={roomId}/>
         </div>

@@ -22,8 +22,27 @@
         display: flex;
         gap: 16px;
 
-        button{
+        button:not(#toggle-theme){
           height: 40px;
+          &.members{
+            align-self: center;
+            border: 1px solid #eaeaea;
+            background: #fff2;
+            padding: 4px 8px;
+            border-radius: 50%;
+            font-size: 0;
+            transition: .2s;
+          
+            svg { fill: #223; }
+
+            &:hover{
+              filter: brightness(.7);
+            }
+          }
+        }
+        #toggle-theme{
+          position: static;
+          align-self: center;
         }
       }
     }
@@ -125,6 +144,7 @@
         }
       }
     }
+    svg{ fill:#bbc !important; }
     .room-code{
       border-color: #2f1c6b;
       background: #fff2;
@@ -145,7 +165,13 @@
       }
       span{ color: #bbc; }
     }
-    .button{ background: #2f1c6b; }
+    .button{
+      background: #2f1c6b;
+
+      &.outlined{
+        background: #2f1c6b33;
+      }
+    }
     .question{
       background: #fefefe02;
       p{ color: #99a; }

@@ -31,6 +31,7 @@ export function useRoom(roomId: string) {
   const { user } = useAuth();
   const [title, setTitle] = useState('');
   const [questions, setQuestions] = useState<QuestionType[]>([]);
+  const [endedAt, setEndedAt] = useState<string | undefined>();
 
   useEffect(()=>{
     if(roomId){
@@ -54,6 +55,7 @@ export function useRoom(roomId: string) {
 
         setTitle(databaseRoom.title);
         setQuestions(parsedQuestions);
+        setEndedAt(databaseRoom.endedAt ?? undefined);
       });
 
       return () => {
@@ -63,6 +65,6 @@ export function useRoom(roomId: string) {
 
   },[roomId, user?.id]);
 
-  return { questions, title };
+  return { questions, title, endedAt };
 
 }
