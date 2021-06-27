@@ -3,11 +3,12 @@ import { useHistory } from 'react-router-dom';
 import { database } from '../services/firebase';
 
 import { useAuth } from '../hooks/useAuth';
+import { useTheme } from '../hooks/useTheme';
 import { Button } from '../components/Button';
-import { Splash } from '../components/Splash';
 
 import illustrationImg from '../assets/images/illustration.svg';
 import logoImg from '../assets/images/logo.svg';
+import logoDarkImg from '../assets/images/logo-dark.svg';
 import googleIconImg from '../assets/images/google-icon.svg';
 
 import '../styles/auth.scss';
@@ -15,11 +16,12 @@ import '../styles/auth.scss';
 export function Home(){
   const history = useHistory();
   const { user, signInWithGoogle } = useAuth();
+  const { theme, btnToggleTheme } = useTheme();
   const [roomCode, setRoomCode] = useState('');
   // BEGIN:: SPLASH
   const [inSplash,setInSplash] = useState(true);
   useEffect(() => {
-    setTimeout(() => setInSplash(false),1000);
+    setTimeout(() => setInSplash(false),300);
   },[]);
   // END:: SPLASH
 
@@ -50,9 +52,7 @@ export function Home(){
     history.push(`/rooms/${roomCode}`);
   }
   return (
-    <>
-    {inSplash?<Splash/>:(
-    <div id="page-auth">
+    <div id="page-auth" className={theme == 'dark'? 'theme-dark':''}>
       <aside>
         <img src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas"/>
         <strong>Toda pergunta tem uma resposta.</strong>
@@ -60,27 +60,30 @@ export function Home(){
       </aside>
       <main>
         <div className="main-content">
+          { btnToggleTheme() }
+          { theme == 'light' ? (
             <img src={logoImg} alt="Letmeask"/>
-            <button className="create-room" onClick={handleCreateRoom}>
-              <img src={googleIconImg} alt="Logo do Google"/>
-              Crie sua sala com o Google
-            </button>
-            <div className="separator">ou entre em uma sala</div>
-            <form onSubmit={handleJoinRoom}>
-              <input
-                type="text"
-                placeholder="Digite o código da sala"
-                value={roomCode}
-                onChange={event => setRoomCode(event.target.value)}
-              />
-              <Button type="submit">
-                Entrar na sala
-              </Button>
-            </form>
+          ):(
+            <img src={logoDarkImg} alt="Letmeask"/>
+          )}
+          <button className="create-room" onClick={handleCreateRoom}>
+            <img src={googleIconImg} alt="Logo do Google"/>
+            Crie sua sala com o Google
+          </button>
+          <div className="separator">ou entre em uma sala</div>
+          <form onSubmit={handleJoinRoom}>
+            <input
+              type="text"
+              placeholder="Digite o código da sala"
+              value={roomCode}
+              onChange={event => setRoomCode(event.target.value)}
+            />
+            <Button type="submit">
+              Entrar na sala
+            </Button>
+          </form>
         </div>
       </main>
     </div>
-    )}
-    </>
   );
 }

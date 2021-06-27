@@ -1,5 +1,5 @@
 import { useState, FormEvent } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
 import { database } from "../services/firebase";
 import { useAuth } from "../hooks/useAuth";
@@ -9,8 +9,10 @@ import { Question } from "../components/Question";
 import { RoomCode } from "../components/RoomCode";
 
 import logoImg from "../assets/images/logo.svg";
+import logoDarkImg from "../assets/images/logo-dark.svg";
 
 import '../styles/room.scss';
+import { useTheme } from "../hooks/useTheme";
 
 type RoomParams = {
   id: string;
@@ -24,6 +26,8 @@ export function Room(){
   
   const [newQuestion, setNewQuestion] = useState('');
   const { user, signInWithGoogle } = useAuth();
+  const { theme, btnToggleTheme } = useTheme();
+  const history = useHistory();
 
   async function handleSendQuestion(event: FormEvent){
     event.preventDefault();
@@ -42,7 +46,7 @@ export function Room(){
     }
 
     await database.ref(`rooms/${roomId}/questions`).push(question);
-    toast.success('Successfully toasted!');
+    toast.success('Pergunta enviada!');
     setNewQuestion('');
   }
   async function handleLikeQuestion(questionId: string, likeId?: string){
@@ -53,13 +57,16 @@ export function Room(){
 
   }
   return (
-    <div id="page-room">
+    <div id="page-room" className={theme == 'dark'? 'theme-dark':''}>
       <Toaster/>
       <header>
         <div className="content">
-          <img src={logoImg} alt="Letmeask"/>
+          <img src={ theme == 'light' ? logoImg : logoDarkImg } alt="Letmeask" onClick={
+            () => history.push('/')
+          }/>
           <RoomCode code={roomId}/>
         </div>
+        { btnToggleTheme() }
       </header>
 
       <main>

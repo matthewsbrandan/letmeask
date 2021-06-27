@@ -7,11 +7,13 @@ import { Question } from "../components/Question";
 import { RoomCode } from "../components/RoomCode";
 
 import logoImg from "../assets/images/logo.svg";
+import logoDarkImg from "../assets/images/logo-dark.svg";
 import deleteImg from "../assets/images/delete.svg";
 import checkImg from "../assets/images/check.svg";
 import answerImg from "../assets/images/answer.svg";
 
 import '../styles/room.scss';
+import { useTheme } from "../hooks/useTheme";
 
 type RoomParams = {
   id: string;
@@ -22,6 +24,7 @@ export function AdminRoom(){
   const params = useParams<RoomParams>();
   const roomId = params.id;
   const { title, questions } = useRoom(roomId);
+  const { theme, btnToggleTheme } = useTheme();
   const history = useHistory();
 
   async function handleEndRoom(){
@@ -52,16 +55,19 @@ export function AdminRoom(){
     });
   }
   return (
-    <div id="page-room">
+    <div id="page-room" className={theme == 'dark'? 'theme-dark':''}>
       <Toaster/>
       <header>
         <div className="content">
-          <img src={logoImg} alt="Letmeask"/>
+          <img src={ theme == 'light' ? logoImg : logoDarkImg } alt="Letmeask" onClick={
+            () => history.push('/')
+          }/>
           <div>
             <RoomCode code={roomId}/>
             <Button isOutlined onClick={handleEndRoom}>Encerrar Sala</Button>
           </div>
         </div>
+        { btnToggleTheme() }
       </header>
 
       <main>

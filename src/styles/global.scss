@@ -3,6 +3,20 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #29292e;
+}
+
 body{
   background: #f8f8f8;
   color: #29292e;
@@ -14,4 +28,22 @@ body, input, button, textarea{
 
 button, [onclick]{
   cursor: pointer;
+}
+
+#toggle-theme{
+  border: 1px solid #eaeaea;
+  background: #fff2;
+  width: auto;
+  padding: 4px;
+
+  position: absolute;
+  top: .2rem;
+  right: .2rem;
+  border-radius: 50%;
+  font-size: 0;
+  transition: .2s;
+
+  &:hover{
+    filter: brightness(.7);
+  }
 }

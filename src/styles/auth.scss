@@ -137,4 +137,22 @@
       }
     }
   }
+  // THEME DARK
+  &.theme-dark{
+    aside{
+      background: #2f1c6b;
+      color: #bbc;
+      
+      p{
+        color: #99a;
+      }
+    }
+    h2{ color: #bbc; }
+    .create-room{ background: #bb1b0d; }
+    input{
+      background: rgba(255,255,255,0.02) !important;
+      color: #889;
+    }
+    .button{ background: #2f1c6b; }
+  }
 }
