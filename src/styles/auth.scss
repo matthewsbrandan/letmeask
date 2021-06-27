@@ -161,3 +161,8 @@
     .button{ background: #2f1c6b; }
   }
 }
+@media (max-width: 768px){
+  aside{
+    display: none !important;
+  }
+}

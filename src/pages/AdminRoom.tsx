@@ -14,6 +14,7 @@ import answerImg from "../assets/images/answer.svg";
 
 import '../styles/room.scss';
 import { useTheme } from "../hooks/useTheme";
+import { useState } from "react";
 
 type RoomParams = {
   id: string;
@@ -26,6 +27,7 @@ export function AdminRoom(){
   const { title, questions, endedAt } = useRoom(roomId);
   const { theme, btnToggleTheme } = useTheme();
   const history = useHistory();
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   function handleDate(date: string){
     let dateParsed = new Date(date);
@@ -70,7 +72,10 @@ export function AdminRoom(){
           <img src={ theme == 'light' ? logoImg : logoDarkImg } alt="Letmeask" onClick={
             () => history.push('/home')
           }/>
-          <div>
+          <button type="button" className="btn-collapse" onClick={() => setIsCollapsed(!isCollapsed)}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M4 6H20V8H4zM4 11H20V13H4zM4 16H20V18H4z"></path></svg>
+          </button>
+          <div className={isCollapsed ? 'collapsed':''}>
             <button type="button" className="members" onClick={() => history.push(`/rooms/${roomId}`)}>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16.604,11.048c0.604-1.029,0.872-2.228,0.751-3.44c-0.179-1.784-1.175-3.361-2.803-4.44l-1.105,1.666 c1.119,0.742,1.8,1.799,1.918,2.974c0.11,1.105-0.28,2.194-1.072,2.986l-1.192,1.192l1.618,0.475C18.951,13.701,19,17.957,19,18h2 C21,16.211,20.044,12.715,16.604,11.048z"></path><path d="M9.5 12c2.206 0 4-1.794 4-4s-1.794-4-4-4-4 1.794-4 4S7.294 12 9.5 12zM9.5 6c1.103 0 2 .897 2 2s-.897 2-2 2-2-.897-2-2S8.397 6 9.5 6zM11 13H8c-3.309 0-6 2.691-6 6v1h2v-1c0-2.206 1.794-4 4-4h3c2.206 0 4 1.794 4 4v1h2v-1C17 15.691 14.309 13 11 13z"></path></svg>
             </button>

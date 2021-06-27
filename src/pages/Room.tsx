@@ -25,6 +25,7 @@ export function Room(){
   const { title, questions } = useRoom(roomId);
   
   const [newQuestion, setNewQuestion] = useState('');
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const { user, signInWithGoogle } = useAuth();
   const { theme, btnToggleTheme } = useTheme();
   const history = useHistory();
@@ -64,9 +65,14 @@ export function Room(){
           <img src={ theme == 'light' ? logoImg : logoDarkImg } alt="Letmeask" onClick={
             () => history.push('/home')
           }/>
-          <RoomCode code={roomId}/>
+          <button type="button" className="btn-collapse" onClick={() => setIsCollapsed(!isCollapsed)}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M4 6H20V8H4zM4 11H20V13H4zM4 16H20V18H4z"></path></svg>
+          </button>
+          <div className={isCollapsed ? 'collapsed':''}>
+            <RoomCode code={roomId}/>
+            { btnToggleTheme() }
+          </div>
         </div>
-        { btnToggleTheme() }
       </header>
 
       <main>
