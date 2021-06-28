@@ -25,7 +25,7 @@ export function Room(){
   const { title, questions } = useRoom(roomId);
   
   const [newQuestion, setNewQuestion] = useState('');
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const { user, signInWithGoogle } = useAuth();
   const { theme, btnToggleTheme } = useTheme();
   const history = useHistory();

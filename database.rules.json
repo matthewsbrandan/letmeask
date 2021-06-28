@@ -1,7 +1,7 @@
 {
   "rules": {
     "rooms": {
-      ".read": false,
+      ".read": "auth != null && (!data.exists() || data.child('authorId').val() == auth.id)",
       ".write": "auth != null",
       "$roomId": {
         ".read": true,

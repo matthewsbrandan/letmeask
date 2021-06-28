@@ -27,7 +27,7 @@ export function AdminRoom(){
   const { title, questions, endedAt } = useRoom(roomId);
   const { theme, btnToggleTheme } = useTheme();
   const history = useHistory();
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   function handleDate(date: string){
     let dateParsed = new Date(date);
